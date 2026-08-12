@@ -1,0 +1,28 @@
+# Python dependencies for the passive VDR notebooks.
+#
+# ngspice is an EXTERNAL binary and is not pip-installable. Get it from
+# http://ngspice.sourceforge.net/ and set NGSPICE_BIN to its bin directory.
+# Only required when RUN_SIMULATION = True.
+
+# NeuPrint client + NeuronModel (skeleton -> SPICE netlist)
+neuprint-python>=0.5.2
+
+# Skeleton handling, longest_neurite, morphology plots
+navis>=1.10
+
+# Numerics
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+
+# Plotting
+matplotlib>=3.7
+bokeh>=3.4
+holoviews>=1.18
+hvplot>=0.9
+tqdm>=4.65
+
+# Jupyter (running / rendering the notebooks)
+jupyter
+ipykernel
+nbconvert

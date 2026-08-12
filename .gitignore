@@ -1,0 +1,41 @@
+# --- Secrets: never commit tokens or local env files ---
+.env
+.env.*
+*token*.txt
+*_token*
+neuprint_token*
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+build/
+dist/
+
+# --- Raw sweep output (85-100 MB per run; regenerate with RUN_SIMULATION = True) ---
+# The committed reduced CSVs are whitelisted below.
+results/*
+!results/README.md
+!results/idraxon_maxdf.csv
+!results/axon_maxdf.csv
+
+# --- Figures / animations written by the notebooks ---
+notebooks/*.png
+notebooks/*.svg
+notebooks/*.gif
+notebooks/*.csv
+notebooks/*.tsv
+notebooks/*.txt
+!notebooks/RandCValues.png
+figures/
+
+# --- ngspice scratch ---
+Spice64/
+*.raw
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

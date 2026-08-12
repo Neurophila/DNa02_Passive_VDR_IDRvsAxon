@@ -1,0 +1,30 @@
+# Conda environment for the passive VDR notebooks.
+#   conda env create -f environment.yml
+#   conda activate vdr_ngspice
+#
+# ngspice itself is NOT installed here -- it is an external binary. Install it from
+# http://ngspice.sourceforge.net/ and point NGSPICE_BIN at its bin directory.
+# Only needed when RUN_SIMULATION = True.
+name: vdr_ngspice
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy>=1.24
+  - pandas>=2.0
+  - scipy>=1.10
+  - matplotlib>=3.7
+  - tqdm>=4.65
+  - jupyter
+  - ipykernel
+  - nbconvert
+  - pip
+  - pip:
+      # NeuPrint client + NeuronModel (builds the SPICE netlist from the skeleton)
+      - neuprint-python>=0.5.2
+      # Skeleton handling, longest_neurite, 2D/3D morphology plots
+      - navis>=1.10
+      # Interactive plots used throughout the notebooks
+      - bokeh>=3.4
+      - holoviews>=1.18
+      - hvplot>=0.9
