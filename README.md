@@ -12,42 +12,9 @@ The two notebooks are identical apart from **where the voltage is read out**:
 | `..._IDRandAxonVDR.ipynb` | `IDRandAxonVDR_region` | ~73 | Inter-dendritic region **+** axon / DAS |
 | `..._AxonVDR_region.ipynb` | `AxonVDR_region` | ~50 | Axon / DAS **only** |
 
-The axon set is a strict subset of the IDR+axon set, so this asks a targeted question:
-**does adding the IDR as a possible spike-initiation site bring inputs electrotonically
-closer to their readout?**
-
 Morphology and connectivity come from the hemibrain connectome (`DNa02_R`) and are
 fetched live from NeuPrint, so **a token is required to re-run** (see
 [Credentials](#credentials)). The committed results and rendered HTML need nothing.
-
-## Result
-
-From the completed sweeps in [`results/`](results/), pairing the two runs on the same
-10,494 input synapses. VDR is `peak V at input ÷ peak V at the best-responding monitored
-node`, so **higher = more decay**.
-
-| | IDR + axon readout | Axon-only readout |
-|---|---|---|
-| Median VDR | **8.68** | **9.73** |
-| IQR | 5.41 – 13.24 | 5.99 – 14.88 |
-| Mean VDR | 10.05 | 11.28 |
-
-The population difference resolves into two sharply separated groups:
-
-| Group | n (% of inputs) | What happens |
-|-------|-----------------|--------------|
-| **Axon node still wins** | 4,885 (46.6 %) | The best-responding node is an axon node in both runs → VDR **identical** (median 9.01 vs 9.01; output voltages match to floating-point). |
-| **An IDR node wins** | 5,609 (53.4 %) | An IDR node out-responds every axon node → VDR drops from 10.38 to 8.39, a **~1.28× reduction**. |
-
-That 1.28× is strikingly uniform (median 1.28×, 90th percentile 1.28×, max 1.29×),
-which points to a near-fixed electrotonic offset between the winning IDR node and the
-winning axon node rather than an input-specific effect.
-
-> **Read the sign of this correctly.** Because the IDR+axon monitor set *contains* the
-> axon-only set, its per-input VDR can never be larger — the comparison is bounded by
-> construction, and a signed-rank test on it is not informative (every non-zero
-> difference has the same sign by definition). The meaningful findings are the **46.6 / 53.4
-> split** and the **magnitude** of the reduction where the IDR wins, not the direction.
 
 ## Quick start
 
@@ -182,11 +149,6 @@ and local paths redacted from the cell source and outputs left untouched.
 - Gornet & Scheffer, *bioRxiv* 177113 — simulating extracted connectomes
 
 With thanks to Lou Scheffer, Stuart Berg, and Steve Plaza.
-
-> **Caveat.** This is a purely **passive** model — no voltage-gated conductances. It
-> bounds how far synaptic signals travel by cable filtering alone; it does not model
-> spike initiation. VDR values are model-internal comparisons (region vs region), not
-> calibrated predictions.
 
 ## License
 

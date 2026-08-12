@@ -33,13 +33,7 @@ These are **not** the raw sweep files. The raw sweep writes one row per
 (input × every monitored node) — 10,494 × ~73 and 10,494 × ~50 rows, ~85–100 MB each.
 These committed files are reduced to **one row per input synapse**, keeping the
 monitored node with the highest peak voltage. So `in_swcid` is unique across all 10,494
-rows, while `out_swcid` takes only the values that ever won:
-
-- `idraxon_maxdf.csv` — 20 distinct winning nodes (12 IDR, 8 axon)
-- `axon_maxdf.csv` — 8 distinct winning nodes (all axon)
-
-Those 8 axon nodes are the same in both files, which is what makes the two runs directly
-pairable on `in_swcid`.
+rows, while `out_swcid` takes only the values that ever came out highest.
 
 ## Written by a re-run, not committed
 
