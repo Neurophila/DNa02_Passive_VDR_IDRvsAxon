@@ -116,31 +116,6 @@ otherwise. The main VDR map is driven from the results file, so it renders eithe
   monitored node that responded most strongly. Peaks are taken independently, so the two
   times differ (input peaks ≈ 1.2 ms, readout ≈ 3.8–5.4 ms).
 
-## Provenance
-
-The notebooks are the working-copy versions with these changes, and **no change to the
-simulation physics or parameters**:
-
-1. **Credential scrub** — a hard-coded NeuPrint JWT in the client cell was replaced with
-   an environment-variable read. *This token should be revoked and reissued by its owner:*
-   it sat in plain text in shared-drive notebooks and does not expire until 2028. It was
-   never committed to any git history.
-2. **Path scrub** — hard-coded `Z:\...` ngspice and working-directory paths became
-   `NGSPICE_BIN` and the `REPO_ROOT` bootstrap. The `os.chdir` cells were removed.
-3. **`RUN_SIMULATION` gate** — the IDR notebook's sweep had been commented out, so it
-   could not run end to end while the axon notebook's ran unconditionally. Both now share
-   one gated sweep cell with region-tagged, timestamped output filenames.
-4. **Results-parsing fix** — the VDR-map cell parsed the sweep file **positionally**,
-   starting at column 0. The writer emits `combo_id` as column 0, so every field was read
-   one slot to the left (and `int("2_to_5625")` would raise). It now selects by column
-   name. This is why the figure is regenerated rather than reused.
-5. **NumPy 2.0 compatibility** — the ngspice raw-file parser used `np.complex_`, removed
-   in NumPy 2.0, which would abort the sweep on any current environment. Replaced with
-   `np.complex128`, which is the same dtype and works on NumPy 1.x and 2.x alike.
-
-The `rendered/` HTML is exported from the original executed notebooks, with credentials
-and local paths redacted from the cell source and outputs left untouched.
-
 ## Literature
 
 - Scheffer et al. 2020, *eLife* 9:e57443 — hemibrain connectome, R/C values
